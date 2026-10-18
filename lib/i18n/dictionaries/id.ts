@@ -2,7 +2,7 @@ import type { Dictionary } from '@/lib/i18n/dictionaries/en';
 
 export const id: Dictionary = {
   'nav.main': 'Navigasi utama', 'nav.overview': 'Ringkasan', 'nav.logs': 'Log', 'nav.games': 'Tabel Game', 'nav.accounts': 'Akun',
-  'nav.analytics': 'Analitik', 'nav.users': 'Pengguna', 'nav.sessions': 'Sesi', 'nav.system': 'Sistem', 'nav.logout': 'Keluar',
+  'nav.analytics': 'Analitik', 'nav.users': 'Pengguna', 'nav.sessions': 'Sesi', 'nav.system': 'Sistem', 'nav.logout': 'Keluar', 'nav.live': 'Kanvas Langsung',
 
   'header.greeting': 'Halo, {name}', 'header.live': 'LIVE', 'header.connecting': 'Menyambung…', 'header.reconnecting': 'Menyambung ulang…', 'header.paused': 'Dijeda',
   'header.logCount': '{count} log', 'header.logsLoaded': 'Jumlah log dimuat', 'header.pause': 'Jeda', 'header.resume': 'Lanjut',

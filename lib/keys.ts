@@ -44,6 +44,20 @@ export const KEYS = {
 
   // ----- Pembatas laju -----
   rateLimit: (scope: string, id: string) => `rl:${scope}:${id}`,
+
+  // ----- HWID fingerprinting & watermarking -----
+  // Akun Roblox diikat ke hash HWID (fingerprint akun+game). Saat skrip diunduh, payload
+  // terenkripsi (accountId, userId, hwidHash, issuedAt) disisipkan; skrip memverifikasi saat jalan.
+  hwidBind: (accountId: string) => `hwid:bind:${accountId}`, // hash: { hwidHash, boundAt, boundBy }
+  hwidDownload: (id: string) => `hwid:dl:${id}`, // string JSON {accountId,hwidHash,key,issuedAt} TTL'd
+  hwidLeaks: 'hwid:leaks', // list kejadian kebocoran (LPUSH, terbaru di depan, dipangkas)
+  hwidLeakSeq: 'hwid:leaks:seq', // penanda perubahan daftar kebocoran
+
+  // ----- Remote kill-switch / perintah kontrol -----
+  // Perintah KILL/PAUSE/RESUME per accountId dengan TTL pendek. control:cmd:<id> = perintah
+  // (auto-kedaluwarsa); control:index = daftar accountId yang diberi perintah (untuk dashboard).
+  controlCmd: (accountId: string) => `control:cmd:${accountId}`,
+  controlIndex: 'control:index', // hash: accountId -> ISO waktu perintah diterbitkan
 } as const;
 
 // Kunci yang boleh dihapus oleh aksi Clear Logs (daftar putih, sengaja terpisah dari users:*).

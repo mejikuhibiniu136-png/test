@@ -8,7 +8,7 @@ import { ROLE_LABEL_KEY } from '@/lib/rbac/permissions';
 import type { MessageKey } from '@/lib/i18n/dictionaries/en';
 import type { Role } from '@/types';
 
-export type ViewId = 'overview' | 'logs' | 'games' | 'accounts' | 'analytics' | 'users' | 'sessions' | 'system';
+export type ViewId = 'overview' | 'logs' | 'games' | 'accounts' | 'analytics' | 'live' | 'users' | 'sessions' | 'system';
 
 const ROLE_TONE: Record<Role, 'violet' | 'accent' | 'neutral'> = { superadmin: 'violet', admin: 'accent', viewer: 'neutral' };
 
@@ -19,6 +19,7 @@ export const VIEWS: { id: ViewId; labelKey: MessageKey; icon: typeof Radar; staf
   { id: 'games', labelKey: 'nav.games', icon: Boxes },
   { id: 'accounts', labelKey: 'nav.accounts', icon: Users },
   { id: 'analytics', labelKey: 'nav.analytics', icon: ChartColumn },
+  { id: 'live', labelKey: 'nav.live', icon: Radar },
   { id: 'users', labelKey: 'nav.users', icon: Users, staffOnly: true },
   { id: 'sessions', labelKey: 'nav.sessions', icon: MonitorSmartphone },
   { id: 'system', labelKey: 'nav.system', icon: ShieldCheck, superadminOnly: true },

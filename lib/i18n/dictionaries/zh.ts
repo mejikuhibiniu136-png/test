@@ -2,7 +2,7 @@ import type { Dictionary } from '@/lib/i18n/dictionaries/en';
 
 export const zh: Dictionary = {
   'nav.main': '主导航', 'nav.overview': '概览', 'nav.logs': '日志', 'nav.games': '游戏表', 'nav.accounts': '账号',
-  'nav.analytics': '分析', 'nav.users': '用户', 'nav.sessions': '会话', 'nav.system': '系统', 'nav.logout': '退出登录',
+  'nav.analytics': '分析', 'nav.users': '用户', 'nav.sessions': '会话', 'nav.system': '系统', 'nav.logout': '退出登录', 'nav.live': '实时画布',
 
   'header.greeting': '你好，{name}', 'header.live': '实时', 'header.connecting': '连接中…', 'header.reconnecting': '重新连接中…', 'header.paused': '已暂停',
   'header.logCount': '{count} 条日志', 'header.logsLoaded': '加载的日志数量', 'header.pause': '暂停', 'header.resume': '继续',

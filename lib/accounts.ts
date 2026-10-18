@@ -132,6 +132,10 @@ export function mergeAccount(
       fps: telemetry(payload.fps, 1000),
       pingMs: telemetry(payload.pingMs, MAX_LATENCY_MS),
       memoryMb: telemetry(payload.memoryMb, 65_536),
+      positionX: telemetry(payload.positionX, 1e9),
+      positionY: telemetry(payload.positionY, 1e9),
+      health: telemetry(payload.health, 1_000_000),
+      inventory: payload.inventory ?? prev?.inventory,
       rev: (Number(prev?.rev) || 0) + 1, // nomor revisi untuk compare-and-set
     },
   };

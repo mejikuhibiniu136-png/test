@@ -67,6 +67,11 @@ export interface TrackedAccount {
   fps?: number; // telemetri klien Roblox (opsional)
   pingMs?: number;
   memoryMb?: number;
+  // Telemetri posisi & status untuk Live Visual Canvas (opsional, dikirim skrip yang mendukung).
+  positionX?: number;
+  positionY?: number;
+  health?: number;
+  inventory?: string;
   rev: number;
 }
 
@@ -151,7 +156,12 @@ export type AuditAction =
   | 'session.revoke'
   | 'queue.drain'
   | 'queue.setting'
-  | 'crypto.sweep';
+  | 'crypto.sweep'
+  | 'hwid.bind'
+  | 'hwid.leak'
+  | 'control.kill'
+  | 'control.pause'
+  | 'control.resume';
 
 export interface AuditEntry {
   id: string;
@@ -179,4 +189,47 @@ export interface StreamPayload {
   game: string; // slug yang sedang dilihat ('all' = stream gabungan)
   seq: number;
   timestamp: number;
+}
+
+// ----- HWID fingerprinting & watermarking -----
+// Ikatan akun Roblox ke hash HWID (fingerprint akun+game). Disimpan di hwid:bind:<accountId>.
+export interface HwidBinding {
+  accountId: string;
+  hwidHash: string; // 8-hex, djb2 atas "userId|placeId" (cermin computeHwidHash di Lua)
+  userId: string;
+  placeId: string;
+  boundAt: string;
+  boundBy: string;
+}
+
+// Rekaman unduhan skrip ber-watermark: kunci dekripsi dipakai server memvalidasi laporan kebocoran.
+export interface HwidDownloadRecord {
+  id: string; // downloadId (UUID), juga field di Redis hwid:dl:<id>
+  accountId: string;
+  hwidHash: string;
+  key: string; // kunci xorshift untuk sealScript; TIDAK ditanam plain di skrip (lihat obfuscate)
+  issuedAt: string;
+  issuedBy: string;
+}
+
+// Kejadian kebocoran HWID: skrip berjalan di perangkat/account yang HWID-nya tidak cocok.
+export interface HwidLeak {
+  id: string;
+  at: string;
+  accountId: string;
+  expectedHwid: string; // hash HWID yang diikat (dari payload terenkripsi skrip)
+  detectedHwid: string; // hash HWID yang dihitung saat skrip berjalan
+  reason: string;
+  ip?: string;
+}
+
+// ----- Remote kill-switch / perintah kontrol -----
+export type ControlCommandType = 'KILL' | 'PAUSE' | 'RESUME';
+
+export interface ControlEntry {
+  accountId: string;
+  command: ControlCommandType;
+  setAt: string;
+  setBy: string;
+  ttlSeconds: number;
 }

@@ -26,6 +26,11 @@ const LABEL: Record<AuditAction, string> = {
   'queue.drain': 'Kuras antrean ingest',
   'queue.setting': 'Ubah mode antrean',
   'crypto.sweep': 'Sapuan rotasi KEK',
+  'control.kill': 'Kill-switch aktif',
+  'control.pause': 'Jeda skrip',
+  'control.resume': 'Lanjutkan skrip',
+  'hwid.bind': 'Ikat HWID',
+  'hwid.leak': 'Laporan kebocoran HWID',
 };
 
 // Jejak 50 aksi sensitif terakhir. Teks berasal dari input pengguna, jadi hanya dirender sebagai teks.

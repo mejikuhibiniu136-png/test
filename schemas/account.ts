@@ -45,6 +45,11 @@ export const accountPayloadSchema = z.object({
   fps: z.number().finite().min(0).max(1000).optional().catch(undefined),
   pingMs: z.number().finite().min(0).max(60_000).optional().catch(undefined),
   memoryMb: z.number().finite().min(0).max(65_536).optional().catch(undefined),
+  // Posisi karakter 2D & status untuk Live Visual Canvas (opsional, hanya skrip yang mendukung).
+  positionX: z.number().finite().optional().catch(undefined),
+  positionY: z.number().finite().optional().catch(undefined),
+  health: z.number().finite().min(0).max(1_000_000).optional().catch(undefined),
+  inventory: text(512).optional().catch(undefined),
   sessionStart: isoLike.optional(),
   timestamp: isoLike.optional(),
   avatarUrl: httpsUrl.optional(),

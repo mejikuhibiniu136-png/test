@@ -17,6 +17,7 @@ import { AccountsView } from '@/components/views/AccountsView';
 import { AnalyticsView } from '@/components/views/AnalyticsView';
 import { GamesView } from '@/components/views/GamesView';
 import { LogsView } from '@/components/views/LogsView';
+import { LiveCanvasView } from '@/components/views/LiveCanvasView';
 import { OverviewView } from '@/components/views/OverviewView';
 import { SessionsView } from '@/components/views/SessionsView';
 import { SystemView } from '@/components/views/SystemView';
@@ -152,6 +153,7 @@ export function Dashboard({ username, role }: { username: string; role: Role }) 
       case 'accounts': return <AccountsView loading={loading} accounts={accounts} logs={logs} now={now} isAdmin={isStaff} onCopyJob={copyJob}
         onDelete={(a) => setConfirm({ title: `Hapus akun ${a.username}?`, danger: true, confirmLabel: 'Hapus akun', message: 'Akun dihapus dari daftar tracker. Akan muncul lagi jika script masih mengirim heartbeat.', onConfirm: () => run(() => apiJson(`/api/accounts?username=${encodeURIComponent(a.username)}`, 'DELETE'), 'Akun dihapus') })} />;
       case 'analytics': return <AnalyticsView loading={loading} logs={logs} gameLabel={gameLabel} />;
+      case 'live': return <LiveCanvasView loading={loading} accounts={accounts} logs={logs} now={now} isAdmin={isStaff} toast={toast} />;
       case 'sessions': return <SessionsView role={role} toast={toast} />;
       case 'users': return isStaff ? <UsersView role={role} toast={toast} onPendingCount={setPendingCount} /> : null;
       case 'system': return isSuperadmin ? <SystemView toast={toast} /> : null;
